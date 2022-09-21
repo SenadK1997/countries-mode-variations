@@ -1,11 +1,12 @@
 <script>
 import NavBar from '../src/components/NavBar.vue';
+import BodyPage from '../src/components/BodyPage.vue';
 export default {
     name: 'Countries',
     data() {
         return {};
     },
-    components: { NavBar }
+    components: { NavBar, BodyPage }
 }
 </script>
 <template>
@@ -13,13 +14,14 @@ export default {
         <NavBar />
     </section>
     <section class="c-section-body">
-
+        <BodyPage />
     </section>
 </template>
 
 <style scoped>
     .c-section-body {
-        background-color: #fafafa;
+        background-color: #ffffff;
+        height: 100%;
     }
 </style>
     

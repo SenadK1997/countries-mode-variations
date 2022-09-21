@@ -3,7 +3,7 @@ import Countries from '../views/Countries.vue';
 </script>
 
 <template>
-  <Countries />
+  <RouterView />
 </template>
 
 <style scoped>
