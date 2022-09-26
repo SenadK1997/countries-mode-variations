@@ -28,6 +28,17 @@
             </div>
         </div>
     </section>
+    <section class="c-section__countries">
+        <div class="c-section__countries__card">
+            <div class="c-section__countries__card__img"><img class="c-section__countries__card__img" src="https://flagcdn.com/de.svg" alt="Error loading image"></div>
+            <div class="c-section__countries__card__information">
+                <h3>Germany</h3>
+                <p>Population: 81.770,900</p>
+                <p>Region: Europe</p>
+                <p>Capital: Berlin</p>
+            </div>
+        </div>
+    </section>
 </template>
 
 <style scoped>
@@ -39,6 +50,18 @@
         font-size: 24px;
         align-items: center;
         background-color: hsl(0, 0%, 98%);
+    }
+    .c-section__countries {
+        background-color: hsl(0, 0%, 98%);
+        display: flex;
+        width: 1268px;
+        justify-content: center;
+        align-items: center;
+        max-width: 100%;
+    }
+    .c-section__countries__card__img {
+        width: 15em;
+        height: 15em;
     }
     .c-section__filters__parent {
         display: flex;
