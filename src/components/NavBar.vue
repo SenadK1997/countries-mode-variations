@@ -24,10 +24,11 @@ export default {
 <style scoped>
 .c-section {
     display: flex;
+    width: 1268px;
     max-width: 100%;
     height: 100px;
     background-color: #fff;
-    justify-content: center;
+    justify-content: space-between;
     box-shadow: 0 2px 16px -6px grey;
 }
 .c-section__parent__div {
@@ -39,6 +40,7 @@ export default {
 .c-section__header h1 {
     font-size: 30px;
     font-weight: 800;
+    margin-left: 35px;
 }
 .c-section__mode {
     display: flex;
@@ -46,6 +48,7 @@ export default {
     font-size: 20px;
     font-weight: 100;
     cursor: pointer;
+    margin-right: 25px;
 }
 .c-section__mode button {
     border: none;

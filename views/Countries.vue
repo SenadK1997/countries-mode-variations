@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
     .c-section-body {
-        background-color: #ffffff;
+        background-color: hsl(0, 0%, 98%);
         height: 100%;
     }
 </style>

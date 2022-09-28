@@ -4,3 +4,7 @@
   font-size: 14px;
   background-color: hsl(0, 0%, 98%);
 }
+
+body {
+  margin: 0;
+}
