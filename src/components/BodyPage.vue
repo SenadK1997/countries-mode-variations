@@ -12,40 +12,46 @@ import { resetTracking } from '@vue/reactivity'
                 search: null,
                 selectedFilter: 'AllRegions',
                 shownCountries: [],
-                searchInput: '',
+                searchValue: '',
                 test: []
             }
         },
 
         created() {
             const that = this
+            let countries = null
             axios.get('https://restcountries.com/v3.1/all')
-            .then(function (response) {
-                // handle success
-                console.log({ response })
-                that.countries = response.data;
-                that.shownCountries = that.countries
+            .then((response) => {
+                this.countries = response.data;
+                this.shownCountries = this.countries
             })
         },
 
         methods: {
             getCapital(country) {
-                if (country.capital?.length) {
+                if (country?.capital?.length) {
                     return country.capital[0]
                 }
             },
             getFlags(country) {
-                    return country.flags.png
+                if (country?.flags?.png) {
+                  return country.flags.png
+                }
+                return ''
             },
             changeFilter() {
                 this.shownCountries = (this.selectedFilter === 'AllRegions') ? this.countries :
-                this.countries.filter(item => item.region === this.selectedFilter
-                )
-            }
-        },
-        computed: {
-            searchFilter() {
-                this.shownCountries = this.countries.filter(searchedCountries => searchedCountries.includes(this.search))
+                this.countries.filter(item => item.region === this.selectedFilter)
+            },
+            onSearch () {
+              this.selectedFilter = 'AllRegions'
+              this.shownCountries = this.countries.filter(country => {
+                const name = country.name.common.toLowerCase()
+                if (name.includes(this.searchValue.toLowerCase())) {
+                  return true
+                }
+                return false
+              })
             }
         }
     }
@@ -56,7 +62,7 @@ import { resetTracking } from '@vue/reactivity'
         <div class="c-section__filters__parent">
             <div class="c-section__filters-input">
                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" ref="searchInput" id="search-input" v-model="searchInput" placeholder="Search for a country...">
+                <input type="text" id="search-input" v-model="searchValue" @change="onSearch" placeholder="Search for a country...">
             </div>
             <div class="c-section__filters-select__parent">
                 <select placeholder="Filter by Region" class="c-section__filters-select__child" v-model="selectedFilter" @change="changeFilter">
@@ -70,12 +76,12 @@ import { resetTracking } from '@vue/reactivity'
             </div>
         </div>
     </section>
-    <section class="c-section__countries">
-            <div v-for="country in searchFilter" class="c-section__countries__card">
+    <section class="c-section__countries" v-if="shownCountries.length">
+            <div v-for="country in shownCountries" class="c-section__countries__card">
                 <div class="c-section__countries__card__inside">
                     <div class="c-section__countries__card__img"><img class="c-section__countries__card__img" 
                         :src="getFlags(country)" alt="Error loading image"></div>
-                        <div class="c-section__countries__card__information">
+                        <div v-if="country" class="c-section__countries__card__information">
                             <h3>{{ country.name.common }}</h3>
                             <p>Population: {{ country.population.toLocaleString() }}</p>
                             <p>Region: {{ country.region }}</p>
