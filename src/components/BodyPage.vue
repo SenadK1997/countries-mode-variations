@@ -1,13 +1,19 @@
 <script>
-    import {createApp} from 'vue'
+    import {createApp, ref} from 'vue'
     import axios from 'axios'
+import { resetTracking } from '@vue/reactivity'
     
     export default {
         name: 'BodyPage',
         data() {
             return {
                 selected: 'Test',
-                countries: []
+                countries: [],
+                search: null,
+                selectedFilter: 'AllRegions',
+                shownCountries: [],
+                searchInput: '',
+                test: []
             }
         },
 
@@ -17,7 +23,8 @@
             .then(function (response) {
                 // handle success
                 console.log({ response })
-                that.countries = response.data
+                that.countries = response.data;
+                that.shownCountries = that.countries
             })
         },
 
@@ -28,8 +35,17 @@
                 }
             },
             getFlags(country) {
-                console.log(country.flags.png)
                     return country.flags.png
+            },
+            changeFilter() {
+                this.shownCountries = (this.selectedFilter === 'AllRegions') ? this.countries :
+                this.countries.filter(item => item.region === this.selectedFilter
+                )
+            }
+        },
+        computed: {
+            searchFilter() {
+                this.shownCountries = this.countries.filter(searchedCountries => searchedCountries.includes(this.search))
             }
         }
     }
@@ -40,28 +56,28 @@
         <div class="c-section__filters__parent">
             <div class="c-section__filters-input">
                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="search-input" placeholder="Search for a country...">
+                <input type="text" ref="searchInput" id="search-input" v-model="searchInput" placeholder="Search for a country...">
             </div>
             <div class="c-section__filters-select__parent">
-                <select placeholder="Filter by Region" class="c-section__filters-select__child">
-                    <option>Filter by Region</option>
-                    <option>Africa</option>
-                    <option>America</option>
-                    <option>Asia</option>
-                    <option>Europe</option>
-                    <option>Oceania</option>
+                <select placeholder="Filter by Region" class="c-section__filters-select__child" v-model="selectedFilter" @change="changeFilter">
+                    <option value="AllRegions">Filter by Region</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Americas">Americas</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Oceania">Oceania</option>
                 </select>
             </div>
         </div>
     </section>
     <section class="c-section__countries">
-            <div v-for="country in countries" class="c-section__countries__card">
+            <div v-for="country in searchFilter" class="c-section__countries__card">
                 <div class="c-section__countries__card__inside">
                     <div class="c-section__countries__card__img"><img class="c-section__countries__card__img" 
                         :src="getFlags(country)" alt="Error loading image"></div>
                         <div class="c-section__countries__card__information">
                             <h3>{{ country.name.common }}</h3>
-                            <p>Population: {{ country.population }}</p>
+                            <p>Population: {{ country.population.toLocaleString() }}</p>
                             <p>Region: {{ country.region }}</p>
                             <p>Capital: {{ getCapital(country) }}</p>
                         </div>
@@ -111,6 +127,7 @@
     }
     .c-section__countries__card__information p {
         margin: 0;
+        font-size: 16px;
     }
     .c-section__countries__card__img {
         width: 260px;
@@ -129,9 +146,10 @@
         height: 50px;
         background-color: #fff;
         border-radius: 5px;
+        margin-left: 40px;
     }
     .c-section__filters-input svg {
-        padding-left: 55px;
+        position: static;
     }
     .c-section__filters-input input {
         border: none;

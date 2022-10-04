@@ -2,9 +2,13 @@
 :root {
   font-family: Nunito Sans;
   font-size: 14px;
-  background-color: hsl(0, 0%, 98%);
+  background-color: #fafafa;
 }
 
 body {
   margin: 0;
+}
+
+#app {
+  margin: 0 auto;
 }
