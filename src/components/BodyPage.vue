@@ -52,7 +52,7 @@ import { resetTracking } from '@vue/reactivity'
                 }
                 return false
               })
-            }
+            },
         }
     }
 </script>
@@ -79,7 +79,7 @@ import { resetTracking } from '@vue/reactivity'
     <section class="c-section__countries" v-if="shownCountries.length">
             <div v-for="country in shownCountries" class="c-section__countries__card">
                 <div class="c-section__countries__card__inside">
-                    <div class="c-section__countries__card__img"><img class="c-section__countries__card__img" 
+                    <div class="c-section__countries__card__img" @click="this.$router.push('/details')"><img class="c-section__countries__card__img" 
                         :src="getFlags(country)" alt="Error loading image"></div>
                         <div v-if="country" class="c-section__countries__card__information">
                             <h3>{{ country.name.common }}</h3>
@@ -139,6 +139,7 @@ import { resetTracking } from '@vue/reactivity'
         width: 260px;
         height: 140px;
         border-radius: 5px;
+        cursor: pointer;
     }
     .c-section__filters__parent {
         display: flex;

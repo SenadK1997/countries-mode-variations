@@ -2,7 +2,7 @@
 :root {
   font-family: Nunito Sans;
   font-size: 14px;
-  background-color: #fafafa;
+  background-color: hsl(0, 0%, 98%);
 }
 
 body {
@@ -11,4 +11,7 @@ body {
 
 #app {
   margin: 0 auto;
+}
+button {
+  padding: 0;
 }
