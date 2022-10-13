@@ -31,6 +31,18 @@ export default {
                 if (detail?.borders?.length) {
                     return detail.borders[0,3]
                 }
+            },
+
+            getLanguages (languages) {
+              const shownLangs = []
+              for (const lang in languages) {
+                // example: imamo objekat {'key1': 'value1', 'key2': 'value2', 'key3': 'Kenan Balija' }
+                // console.log(lang) --- ovo ti je key: key1, key2, key3
+                // console.log(languages[lang]) --- ovo je value: value1, value2, Kenan Balija
+                shownLangs.push(languages[lang]) // --- samo pushas u shown languages array
+              }
+              // shown langs ti bude ['value1', 'value2', 'Kenan Balija']
+              return shownLangs.join(', ') // sa ovom metodom Join odradimo da nam vrati String: 'value1, value2, Kenan Balija'
             }
         }
 }
@@ -64,7 +76,7 @@ export default {
                     <div class="c-section__right-rigth">
                         <p>Top Level Domain: <div>{{ detail.tld }}</div></p>
                         <p>Currencies: <div>{{ detail.currencies }}</div></p>
-                        <p>Languages: <div>{{ detail.languages }}</div></p>
+                        <p>Languages: <div>{{ getLanguages(detail.languages) }}</div></p>
                     </div>
             </div>
         </section>
