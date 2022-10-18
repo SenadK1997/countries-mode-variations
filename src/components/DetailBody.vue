@@ -27,10 +27,12 @@ export default {
                 }
                 return ''
             },
-            getBorders(detail) {
-                if (detail?.borders?.length) {
-                    return detail.borders[0,3]
+            getBorders(borders) {
+                const shownBorders = []
+                for (const border in borders) {
+                    shownBorders.push(borders[border])
                 }
+                return shownBorders
             },
 
             getLanguages (languages) {
@@ -43,6 +45,20 @@ export default {
               }
               // shown langs ti bude ['value1', 'value2', 'Kenan Balija']
               return shownLangs.join(', ') // sa ovom metodom Join odradimo da nam vrati String: 'value1, value2, Kenan Balija'
+            },
+            getDomain(domains) {
+                const shownDomains = []
+                for (const domain in domains) {
+                    shownDomains.push(domains[domain])
+                }
+                return shownDomains.join(', ')
+            },
+            getCurrencies(currencies) {
+                const shownCurrencies = []
+                for (const currency in currencies) {
+                    shownCurrencies.push(currencies[currency])
+                }
+                return shownCurrencies.join(', ')
             }
         }
 }
@@ -50,7 +66,7 @@ export default {
 
 <template>
         <div class="c-back">
-            <button class="c-back-btn">
+            <button class="c-back-btn" @click="this.$router.push('/')">
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 11L6.414 11 11.707 5.707 10.293 4.293 2.586 12 10.293 19.707 11.707 18.293 6.414 13 21 13z"></path></svg>
                 Back
             </button>
@@ -63,20 +79,20 @@ export default {
                 <div class="c-section__right">
                     <div class="c-section__right-left">
                             <h1>{{ detail.name.common }}</h1>
-                            <p>Native Name: <div>{{ detail.name.official }}</div></p>
-                            <p>Population: <div>{{ detail.population.toLocaleString() }}</div></p>
-                            <p>Region: <div>{{ detail.region }}</div></p>
-                            <p>Sub Region: <div>{{ detail.subregion }}</div></p>
-                            <p>Capital: <div>{{ getCapital(detail) }}</div></p>
+                            <p>Native Name: <div class="c-section__rigth__divs">{{ detail.name.official }}</div></p>
+                            <p>Population: <div class="c-section__rigth__divs">{{ detail.population.toLocaleString() }}</div></p>
+                            <p>Region: <div class="c-section__rigth__divs">{{ detail.region }}</div></p>
+                            <p>Sub Region: <div class="c-section__rigth__divs">{{ detail.subregion }}</div></p>
+                            <p>Capital: <div class="c-section__rigth__divs">{{ getCapital(detail) }}</div></p>
                         <div class="c-section-left-border">
                                 <p>Border Countries:</p>
-                                <button>{{ getBorders(detail) }}</button>
+                                <button v-for="border in getBorders(detail.borders)">{{ border }}</button>
                         </div>
                     </div>
                     <div class="c-section__right-rigth">
-                        <p>Top Level Domain: <div>{{ detail.tld }}</div></p>
-                        <p>Currencies: <div>{{ detail.currencies }}</div></p>
-                        <p>Languages: <div>{{ getLanguages(detail.languages) }}</div></p>
+                        <p>Top Level Domain: <div class="c-section__rigth__divs"> {{ getDomain(detail.tld) }}</div></p>
+                        <p>Currencies: <div class="c-section__rigth__divs">{{ getCurrencies(detail.currencies) }}</div></p>
+                        <p>Languages: <div class="c-section__rigth__divs">{{ getLanguages(detail.languages) }}</div></p>
                     </div>
             </div>
         </section>
@@ -84,6 +100,10 @@ export default {
 
 <style scoped>
 @import url('http://fonts.cdnfonts.com/css/nunito-sans');
+#app {
+    margin: 0 auto;
+    justify-content: center;
+}
 
 .c-back {
     display: flex;
@@ -95,6 +115,10 @@ export default {
 .c-section__right-rigth {
    position: static;
 }
+.c-section__rigth__divs {
+    font-weight: 300;
+    margin-left: 5px;
+}
 .c-section__right-rigth p {
     font-weight: 700;
     font-size: 16px;
@@ -102,6 +126,7 @@ export default {
     margin: 0;
     margin-top: 10px;
     display: flex;
+    white-space: nowrap;
 }
 .c-back-btn {
     padding: 10px 40px;
@@ -121,7 +146,7 @@ export default {
     margin-top: 100px;
     display: flex;
     width: 1268px;
-    justify-content: space-between;
+    justify-content: center;
     max-width: 100%;
     align-items: center;
 }
@@ -141,19 +166,25 @@ export default {
 .c-section-left-border {
     display: flex;
     width: 480px;
-    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
 }
 .c-section-left-border button {
     border-radius: 10px;
     border: none;
     background-color: #fff;
     box-shadow: 0px 0px 5px grey;
-    padding: 0px 26px 0px 26px;
+    padding: 6px 26px 6px 26px;
     cursor: pointer;
+    margin-left: 5px;
 }
 .c-section__right-left {
     display: flex;
     flex-direction: column;
+    width: 400px;
+}
+.c-section__rigth-left div {
+    font-weight: 300;
 }
 .c-section__right-left h1 {
     font-weight: 900;
