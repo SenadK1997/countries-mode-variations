@@ -53,6 +53,9 @@ import { resetTracking } from '@vue/reactivity'
                 return false
               })
             },
+            detailedCountry(code) {
+                this.$router.push({name: 'DetailsPage', params: { code: code }})
+            }
         }
     }
 </script>
@@ -79,7 +82,7 @@ import { resetTracking } from '@vue/reactivity'
     <section class="c-section__countries" v-if="shownCountries.length">
             <div v-for="country in shownCountries" class="c-section__countries__card">
                 <div class="c-section__countries__card__inside">
-                    <div class="c-section__countries__card__img" @click="this.$router.push('/details')"><img class="c-section__countries__card__img" 
+                    <div class="c-section__countries__card__img" @click="detailedCountry(country.cca2)"><img class="c-section__countries__card__img" 
                         :src="getFlags(country)" alt="Error loading image"></div>
                         <div v-if="country" class="c-section__countries__card__information">
                             <h3>{{ country.name.common }}</h3>
@@ -143,7 +146,8 @@ import { resetTracking } from '@vue/reactivity'
     }
     .c-section__filters__parent {
         display: flex;
-        width: 1268px;
+        width: 100%;
+        max-width: 1268px;
         justify-content: space-between;
     }
     .c-section__filters-input {
@@ -184,5 +188,41 @@ import { resetTracking } from '@vue/reactivity'
     .c-section__filters-select__child option {
         cursor: pointer;
         font-size: 14px;
+    }
+
+
+    @media (min-width: 375px) {
+        .c-section__filters {
+            width: 100%;
+        }
+        .c-section__filters__parent {
+            display: flex;
+            flex-direction: column;
+        }
+        #search-input {
+            width: 100%;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .c-section__filters-input {
+            width: 100%;
+            padding: 0 auto;
+            margin: 0 auto;
+        }
+        .c-section__filters-select__parent {
+            margin-right: 0;
+            max-width: fit-content;
+            margin-top: 20px;
+        }
+        .c-section__countries {
+            display: flex;
+            flex-direction: column;
+        }
+        .c-section__filters-select__child {
+            color: black;
+        }
+        .c-section__countries__card {
+            margin-top: 50px;
+        }
     }
 </style>

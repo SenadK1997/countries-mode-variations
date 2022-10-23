@@ -8,11 +8,12 @@ export default {
         }
     },
     created() {
-                    axios.get('https://restcountries.com/v3.1/all')
-                    .then((response) => {
-                        this.country = response.data
-                        this.shownCountry = this.country
-                        console.log(response.data)
+        axios.get('https://restcountries.com/v3.1/alpha/' + this.$route.params.code)
+        .then((response) => {
+            this.country = response.data
+            this.shownCountry = this.country
+            console.log(response.data[0])
+                        
                     })
                 },
                 methods: {
@@ -165,9 +166,10 @@ export default {
 
 .c-section-left-border {
     display: flex;
-    width: 480px;
     align-items: center;
     white-space: nowrap;
+    flex-wrap: wrap;
+    float: left;
 }
 .c-section-left-border button {
     border-radius: 10px;
@@ -197,5 +199,45 @@ export default {
     margin: 0;
     margin-top: 10px;
     display: flex;
+}
+
+@media (min-width: 375px) {
+    .c-section {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        margin-top: 50px;
+    }
+    .c-section__right {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+}
+    .c-section__right-left {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+    }
+    .c-section__right-rigth {
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 50px;
+    }
+    .c-section__img {
+        justify-content: center;
+        margin-left: 0;
+    }
+    .c-section__img img {
+        width: 355px;
+        height: 200px;
+        justify-content: center;
+        align-items: center;
+    }
+    .c-back {
+            width: 100%;
+            margin-left: 15px;
+        }
 }
 </style>

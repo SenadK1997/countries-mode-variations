@@ -23,5 +23,14 @@ export default {
         background-color: hsl(0, 0%, 98%);
         height: 100%;
     }
+    .c-section-navbar {
+        max-width: 100%;
+        justify-content: center;
+    }
+    @media (max-width: 375px) {
+        .c-section-navbar {
+            width: 375px;
+        }
+    }
 </style>
     

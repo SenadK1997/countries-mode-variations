@@ -58,4 +58,28 @@ export default {
     cursor: pointer;
 }
 
+@media (max-width: 375px) {
+    .c-section {
+    width: 375px;
+    max-width: 100%;
+    }
+    .c-section__parent__div {
+        width: 375px;
+    }
+    .c-section__header h1 {
+        font-size: 20px;
+    }
+    .c-section__mode {
+    font-size: 14px;
+    font-weight: 100;
+    cursor: pointer;
+    }
+    .c-section__mode button {
+    font-size: 14px;
+    font-weight: 200;
+    cursor: pointer;
+    color: black;
+    }
+}
+
 </style>
