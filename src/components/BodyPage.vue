@@ -191,7 +191,7 @@ import { resetTracking } from '@vue/reactivity'
     }
 
 
-    @media (min-width: 375px) {
+    @media (max-width: 375px) {
         .c-section__filters {
             width: 100%;
         }

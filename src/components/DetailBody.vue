@@ -201,7 +201,7 @@ export default {
     display: flex;
 }
 
-@media (min-width: 375px) {
+@media (max-width: 375px) {
     .c-section {
         display: flex;
         flex-direction: column;
