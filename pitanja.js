@@ -1,0 +1,1 @@
+//how to emit command in vuejs?

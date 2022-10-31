@@ -24,13 +24,9 @@ export default {
         height: 100%;
     }
     .c-section-navbar {
-        max-width: 100%;
-        justify-content: center;
-    }
-    @media (max-width: 375px) {
-        .c-section-navbar {
-            width: 375px;
-        }
+        background-color: black;
+        min-width: 100%;
+        box-shadow: 0 2px 16px -6px grey;
     }
 </style>
     

@@ -61,41 +61,45 @@ import { resetTracking } from '@vue/reactivity'
 </script>
     
 <template>
-    <section class="c-section__filters">
-        <div class="c-section__filters__parent">
-            <div class="c-section__filters-input">
-                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="search-input" v-model="searchValue" @change="onSearch" placeholder="Search for a country...">
-            </div>
-            <div class="c-section__filters-select__parent">
-                <select placeholder="Filter by Region" class="c-section__filters-select__child" v-model="selectedFilter" @change="changeFilter">
-                    <option value="AllRegions">Filter by Region</option>
-                    <option value="Africa">Africa</option>
-                    <option value="Americas">Americas</option>
-                    <option value="Asia">Asia</option>
-                    <option value="Europe">Europe</option>
-                    <option value="Oceania">Oceania</option>
-                </select>
-            </div>
-        </div>
-    </section>
-    <section class="c-section__countries" v-if="shownCountries.length">
-            <div v-for="country in shownCountries" class="c-section__countries__card">
-                <div class="c-section__countries__card__inside">
-                    <div class="c-section__countries__card__img" @click="detailedCountry(country.cca2)"><img class="c-section__countries__card__img" 
-                        :src="getFlags(country)" alt="Error loading image"></div>
-                        <div v-if="country" class="c-section__countries__card__information">
-                            <h3>{{ country.name.common }}</h3>
-                            <p>Population: {{ country.population.toLocaleString() }}</p>
-                            <p>Region: {{ country.region }}</p>
-                            <p>Capital: {{ getCapital(country) }}</p>
-                        </div>
+        <section class="c-section__filters">
+            <div class="c-section__filters__parent">
+                <div class="c-section__filters-input">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="search-input" v-model="searchValue" @change="onSearch" placeholder="Search for a country...">
+                </div>
+                <div class="c-section__filters-select__parent">
+                    <select placeholder="Filter by Region" class="c-section__filters-select__child" v-model="selectedFilter" @change="changeFilter">
+                        <option value="AllRegions">Filter by Region</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Americas">Americas</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Oceania">Oceania</option>
+                    </select>
                 </div>
             </div>
-    </section>
+        </section>
+            <section class="c-section__countries" v-if="shownCountries.length">
+                <div v-for="country in shownCountries" class="c-section__countries__card">
+                    <div class="c-section__countries__card__inside">
+                        <div class="c-section__countries__card__img" @click="detailedCountry(country.cca2)"><img class="c-section__countries__card__img" 
+                            :src="getFlags(country)" alt="Error loading image"></div>
+                            <div v-if="country" class="c-section__countries__card__information">
+                                <h3>{{ country.name.common }}</h3>
+                                <p>Population: {{ country.population.toLocaleString() }}</p>
+                                <p>Region: {{ country.region }}</p>
+                                <p>Capital: {{ getCapital(country) }}</p>
+                            </div>
+                        </div>
+                    </div>
+            </section>
 </template>
 
 <style scoped>
+    .dark {
+        background-color: hsl(207, 26%, 17%);
+        color: hsl(209, 23%, 22%);
+    }
     .c-section__filters {
         display: flex;
         width: 1268px;
@@ -112,18 +116,18 @@ import { resetTracking } from '@vue/reactivity'
         margin: 0;
         justify-content: space-between;
         align-items: center;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px 1px rgb(190, 190, 190);
+        width: fit-content;
     }
     .c-section__countries {
         background-color: hsl(0, 0%, 98%);
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-column-gap: 0px;
-        grid-row-gap: 15px;
-        width: 1268px;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 100%;
-        
+        width: 100%;
+        max-width: 1268px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
     }
     .c-section__countries__card {
         margin-top: 150px;
@@ -133,19 +137,21 @@ import { resetTracking } from '@vue/reactivity'
         flex-direction: column;
         width: 260px;
         background-color: #fff;
+        padding: 15px;
     }
     .c-section__countries__card__information p {
-        margin: 0;
+        margin: 3px 0px;
         font-size: 16px;
     }
     .c-section__countries__card__img {
-        width: 260px;
-        height: 140px;
+        width: 290px;
+        height: 160px;
         border-radius: 5px;
         cursor: pointer;
     }
     .c-section__filters__parent {
         display: flex;
+        flex-wrap: wrap;
         width: 100%;
         max-width: 1268px;
         justify-content: space-between;
@@ -176,6 +182,7 @@ import { resetTracking } from '@vue/reactivity'
         height: 50px;
         align-items: center;
         margin-right: 25px;
+        margin-left: 40px;
     }
     .c-section__filters-select__child {
         border: none;
@@ -191,9 +198,11 @@ import { resetTracking } from '@vue/reactivity'
     }
 
 
-    @media (max-width: 375px) {
+    @media (max-width: 500px) {
+        
         .c-section__filters {
             width: 100%;
+            max-width: 500px;
         }
         .c-section__filters__parent {
             display: flex;
@@ -213,16 +222,28 @@ import { resetTracking } from '@vue/reactivity'
             margin-right: 0;
             max-width: fit-content;
             margin-top: 20px;
+            margin-left: 0px;
         }
         .c-section__countries {
+            width: 100%;
+            max-width: 500px;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .c-section__filters-select__child {
             color: black;
+            margin-left: 0px;
         }
         .c-section__countries__card {
             margin-top: 50px;
+            width: 100%;
+            max-width: 290px;
+        }
+        .c-section__filters__parent {
+            margin-left: 15px;
+            margin-right: 15px;
         }
     }
 </style>

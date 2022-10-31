@@ -92,7 +92,7 @@ export default {
                     </div>
                     <div class="c-section__right-rigth">
                         <p>Top Level Domain: <div class="c-section__rigth__divs"> {{ getDomain(detail.tld) }}</div></p>
-                        <p>Currencies: <div class="c-section__rigth__divs">{{ getCurrencies(detail.currencies) }}</div></p>
+                        <p>Currencies: <div class="c-section__rigth__divs">{{ getCurrencies(detail.currencies.name) }}</div></p>
                         <p>Languages: <div class="c-section__rigth__divs">{{ getLanguages(detail.languages) }}</div></p>
                     </div>
             </div>
@@ -146,9 +146,9 @@ export default {
 .c-section {
     margin-top: 100px;
     display: flex;
-    width: 1268px;
-    justify-content: center;
-    max-width: 100%;
+    max-width: 1268px;
+    justify-content: space-between;
+    width: 100%;
     align-items: center;
 }
 .c-section__img {
@@ -160,7 +160,7 @@ export default {
 }
 .c-section__right {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -169,7 +169,8 @@ export default {
     align-items: center;
     white-space: nowrap;
     flex-wrap: wrap;
-    float: left;
+    width: 620px;
+    text-align: right;
 }
 .c-section-left-border button {
     border-radius: 10px;
@@ -201,11 +202,12 @@ export default {
     display: flex;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 500px) {
     .c-section {
         display: flex;
         flex-direction: column;
         width: 100%;
+        max-width: 500px;
         justify-content: center;
         margin-top: 50px;
     }
@@ -218,10 +220,12 @@ export default {
         display: flex;
         flex-direction: column;
         width: 100%;
+        max-width: 455px;
         justify-content: center;
     }
     .c-section__right-rigth {
         width: 100%;
+        max-width: 455px;
         margin-top: 20px;
         margin-bottom: 50px;
     }
@@ -230,14 +234,20 @@ export default {
         margin-left: 0;
     }
     .c-section__img img {
-        width: 355px;
-        height: 200px;
+        width: 455px;
+        height: 280px;
         justify-content: center;
         align-items: center;
     }
     .c-back {
             width: 100%;
-            margin-left: 15px;
+            max-width: 455px;
+            justify-content: flex-start;
+            margin-left: 25px;
+        }
+        .c-section-left-border {
+            width: 100%;
+            max-width: 455px;
         }
 }
 </style>
