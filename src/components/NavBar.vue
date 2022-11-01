@@ -27,6 +27,7 @@ export default {
     box-shadow: 0 2px 16px -6px grey;
     align-items: center;
     justify-content: center;
+    display: flex;
 }
 .c-section {
     display: flex;
@@ -44,7 +45,6 @@ export default {
 .c-section__header h1 {
     font-size: 30px;
     font-weight: 800;
-    margin-left: 35px;
 }
 .c-section__mode {
     display: flex;

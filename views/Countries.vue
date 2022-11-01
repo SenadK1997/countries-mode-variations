@@ -24,7 +24,6 @@ export default {
         height: 100%;
     }
     .c-section-navbar {
-        background-color: black;
         min-width: 100%;
         box-shadow: 0 2px 16px -6px grey;
     }

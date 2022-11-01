@@ -66,28 +66,29 @@ export default {
 </script>
 
 <template>
+    <div class="test1">
         <div class="c-back">
             <button class="c-back-btn" @click="this.$router.push('/')">
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 11L6.414 11 11.707 5.707 10.293 4.293 2.586 12 10.293 19.707 11.707 18.293 6.414 13 21 13z"></path></svg>
                 Back
             </button>
         </div>
-
-        <section class="c-section" v-for="detail in country">
-            <div class="c-section__img">
-                <img :src="getFlags(detail)" alt="Error loading image">
-            </div>
+        <div class="test">
+            <section class="c-section" v-for="detail in country">
+                <div class="c-section__img">
+                    <img :src="getFlags(detail)" alt="Error loading image">
+                </div>
                 <div class="c-section__right">
                     <div class="c-section__right-left">
-                            <h1>{{ detail.name.common }}</h1>
-                            <p>Native Name: <div class="c-section__rigth__divs">{{ detail.name.official }}</div></p>
-                            <p>Population: <div class="c-section__rigth__divs">{{ detail.population.toLocaleString() }}</div></p>
-                            <p>Region: <div class="c-section__rigth__divs">{{ detail.region }}</div></p>
-                            <p>Sub Region: <div class="c-section__rigth__divs">{{ detail.subregion }}</div></p>
-                            <p>Capital: <div class="c-section__rigth__divs">{{ getCapital(detail) }}</div></p>
+                        <h1>{{ detail.name.common }}</h1>
+                        <p>Native Name: <div class="c-section__rigth__divs">{{ detail.name.official }}</div></p>
+                        <p>Population: <div class="c-section__rigth__divs">{{ detail.population.toLocaleString() }}</div></p>
+                        <p>Region: <div class="c-section__rigth__divs">{{ detail.region }}</div></p>
+                        <p>Sub Region: <div class="c-section__rigth__divs">{{ detail.subregion }}</div></p>
+                        <p>Capital: <div class="c-section__rigth__divs">{{ getCapital(detail) }}</div></p>
                         <div class="c-section-left-border">
-                                <p>Border Countries:</p>
-                                <button v-for="border in getBorders(detail.borders)">{{ border }}</button>
+                            <p>Border Countries:</p>
+                            <button v-for="border in getBorders(detail.borders)">{{ border }}</button>
                         </div>
                     </div>
                     <div class="c-section__right-rigth">
@@ -95,9 +96,11 @@ export default {
                         <p>Currencies: <div class="c-section__rigth__divs">{{ getCurrencies(detail.currencies.name) }}</div></p>
                         <p>Languages: <div class="c-section__rigth__divs">{{ getLanguages(detail.languages) }}</div></p>
                     </div>
-            </div>
-        </section>
-</template>
+                </div>
+            </section>
+        </div>
+    </div>
+    </template>
 
 <style scoped>
 @import url('http://fonts.cdnfonts.com/css/nunito-sans');
@@ -112,6 +115,17 @@ export default {
     margin-top: 70px;
     align-items: center;
     cursor: pointer;
+}
+.test {
+    display: flex;
+}
+.test1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 1268px;
+    margin: auto;
 }
 .c-section__right-rigth {
    position: static;
