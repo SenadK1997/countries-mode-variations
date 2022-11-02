@@ -102,8 +102,7 @@ import { resetTracking } from '@vue/reactivity'
     }
     .c-section__filters {
         display: flex;
-        width: 1268px;
-        max-width: 100%;
+        width: 100%;
         margin-top: 100px;
         font-size: 24px;
         background-color: hsl(0, 0%, 98%);
@@ -122,8 +121,8 @@ import { resetTracking } from '@vue/reactivity'
     }
     .c-section__countries {
         background-color: hsl(0, 0%, 98%);
-        width: 100%;
         max-width: 1268px;
+        margin: 0 auto;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -163,7 +162,6 @@ import { resetTracking } from '@vue/reactivity'
         height: 50px;
         background-color: #fff;
         border-radius: 5px;
-        margin-left: 40px;
     }
     .c-section__filters-input svg {
         position: static;

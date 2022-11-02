@@ -55,11 +55,12 @@ export default {
                 return shownDomains.join(', ')
             },
             getCurrencies(currencies) {
-                const shownCurrencies = []
-                for (const currency in currencies) {
-                    shownCurrencies.push(currencies[currency])
+                let shownCurrencies = []
+                for (let x in currencies) {
+                    shownCurrencies = currencies[x].name;
                 }
-                return shownCurrencies.join(', ')
+                return shownCurrencies
+                
             }
         }
 }
@@ -73,31 +74,31 @@ export default {
                 Back
             </button>
         </div>
-        <div class="test">
-            <section class="c-section" v-for="detail in country">
-                <div class="c-section__img">
-                    <img :src="getFlags(detail)" alt="Error loading image">
-                </div>
-                <div class="c-section__right">
-                    <div class="c-section__right-left">
-                        <h1>{{ detail.name.common }}</h1>
-                        <p>Native Name: <div class="c-section__rigth__divs">{{ detail.name.official }}</div></p>
-                        <p>Population: <div class="c-section__rigth__divs">{{ detail.population.toLocaleString() }}</div></p>
-                        <p>Region: <div class="c-section__rigth__divs">{{ detail.region }}</div></p>
-                        <p>Sub Region: <div class="c-section__rigth__divs">{{ detail.subregion }}</div></p>
-                        <p>Capital: <div class="c-section__rigth__divs">{{ getCapital(detail) }}</div></p>
-                        <div class="c-section-left-border">
-                            <p>Border Countries:</p>
-                            <button v-for="border in getBorders(detail.borders)">{{ border }}</button>
+        <div class="c-parent__section">
+                <section class="c-section" v-for="detail in country">
+                    <div class="c-section__img">
+                        <img :src="getFlags(detail)" alt="Error loading image">
+                    </div>
+                    <div class="c-section__right">
+                        <div class="c-section__right-left">
+                            <h1>{{ detail.name.common }}</h1>
+                            <p>Native Name: <div class="c-section__rigth__divs">{{ detail.name.official }}</div></p>
+                            <p>Population: <div class="c-section__rigth__divs">{{ detail.population.toLocaleString() }}</div></p>
+                            <p>Region: <div class="c-section__rigth__divs">{{ detail.region }}</div></p>
+                            <p>Sub Region: <div class="c-section__rigth__divs">{{ detail.subregion }}</div></p>
+                            <p>Capital: <div class="c-section__rigth__divs">{{ getCapital(detail) }}</div></p>
+                            <div class="c-section-left-border">
+                                <p>Border Countries:</p>
+                                <button v-for="border in getBorders(detail.borders)">{{ border }}</button>
+                            </div>
+                        </div>
+                        <div class="c-section__right-rigth">
+                            <p>Top Level Domain: <div class="c-section__rigth__divs"> {{ getDomain(detail.tld) }}</div></p>
+                            <p>Currencies: <div class="c-section__rigth__divs">{{ getCurrencies(detail.currencies) }}</div></p>
+                            <p>Languages: <div class="c-section__rigth__divs">{{ getLanguages(detail.languages) }}</div></p>
                         </div>
                     </div>
-                    <div class="c-section__right-rigth">
-                        <p>Top Level Domain: <div class="c-section__rigth__divs"> {{ getDomain(detail.tld) }}</div></p>
-                        <p>Currencies: <div class="c-section__rigth__divs">{{ getCurrencies(detail.currencies.name) }}</div></p>
-                        <p>Languages: <div class="c-section__rigth__divs">{{ getLanguages(detail.languages) }}</div></p>
-                    </div>
-                </div>
-            </section>
+                </section>
         </div>
     </div>
     </template>
@@ -111,12 +112,11 @@ export default {
 
 .c-back {
     display: flex;
-    margin-left: 40px;
     margin-top: 70px;
     align-items: center;
     cursor: pointer;
 }
-.test {
+.c-parent__section {
     display: flex;
 }
 .test1 {
@@ -161,16 +161,17 @@ export default {
     margin-top: 100px;
     display: flex;
     max-width: 1268px;
-    justify-content: space-between;
     width: 100%;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 .c-section__img {
-    margin-left: 40px;
+    margin: 0;
 }
 .c-section__img img {
-    width: 600px;
-    height: 400px;
+    width: 550px;
+    height: 380px;
 }
 .c-section__right {
     display: flex;
@@ -248,8 +249,9 @@ export default {
         margin-left: 0;
     }
     .c-section__img img {
-        width: 455px;
-        height: 280px;
+        width: 100%;
+        height: auto;
+        max-width: 500px;
         justify-content: center;
         align-items: center;
     }

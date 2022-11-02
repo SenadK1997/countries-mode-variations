@@ -69,6 +69,7 @@ export default {
     }
     .c-section__parent__div {
         width: 100%;
+        max-width: 500px;
     }
     .c-section__header h1 {
         font-size: 20px;
