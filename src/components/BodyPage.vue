@@ -40,39 +40,33 @@ import { resetTracking } from '@vue/reactivity'
                 return ''
             },
             changeFilter() {
+                this.searchValue = ''
                 this.shownCountries = (this.selectedFilter === 'AllRegions') ? this.countries :
                 this.countries.filter(item => item.region === this.selectedFilter)
             },
-            onSearch () {
-              this.selectedFilter = 'AllRegions'
-              this.shownCountries = this.countries.filter(country => {
-                const name = country.name.common.toLowerCase()
-                if (name.includes(this.searchValue.toLowerCase())) {
-                  return true
-                }
-                return false
-              })
-            },
+            // onSearch () {
+            //   this.selectedFilter = 'AllRegions'
+            //   this.shownCountries = this.countries.filter(country => {
+            //     const name = country.name.common.toLowerCase()
+            //     return !!name.includes(this.searchValue.toLowerCase());
+            //
+            //   })
+            // },
             detailedCountry(code) {
                 this.$router.push({name: 'DetailsPage', params: { code: code }})
             }
         },
-        computed: {
-            computedSearchValue: {
-                    get: function() {
-                        return this.searchValue
-                    },
-                    set: function(newValue) {
-                        this.searchValue = newValue
-                    }
-                },
-            filteredCountries: function () {
-                this.shownCountries = this.countries.filter((country) => {
-                    const name = country.name.common.toLowerCase()
-                    console.log(name)
-                    return name.match(this.searchValue)
-                })
+        watch: {
+          searchValue () {
+            if (this.searchValue.length) {
+              this.selectedFilter = 'AllRegions'
+              return this.shownCountries = this.countries.filter((country) => {
+                const name = country.name.common.toLowerCase()
+                return name.includes(this.searchValue.toLowerCase())
+              })
             }
+            this.shownCountries = this.countries
+          }
         }
     }
 </script>
@@ -82,7 +76,7 @@ import { resetTracking } from '@vue/reactivity'
             <div class="c-section__filters__parent">
                 <div class="c-section__filters-input">
                     <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    <input type="text" id="search-input" v-model="computedSearchValue" placeholder="Search for a country...">
+                    <input type="text" id="search-input" v-model="searchValue" placeholder="Search for a country...">
                 </div>
                 <div class="c-section__filters-select__parent">
                     <select placeholder="Filter by Region" class="c-section__filters-select__child" v-model="selectedFilter" @change="changeFilter">
@@ -97,7 +91,7 @@ import { resetTracking } from '@vue/reactivity'
             </div>
         </section>
             <section class="c-section__countries" v-if="shownCountries.length">
-                <div v-for="country in filteredCountries" class="c-section__countries__card">
+                <div v-for="country in shownCountries" class="c-section__countries__card">
                     <div class="c-section__countries__card__inside">
                         <div class="c-section__countries__card__img" @click="detailedCountry(country.cca2)"><img class="c-section__countries__card__img" 
                             :src="getFlags(country)" alt="Error loading image"></div>
