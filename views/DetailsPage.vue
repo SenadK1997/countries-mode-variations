@@ -10,7 +10,6 @@ import DetailBody from '../src/components/DetailBody.vue';
 }
     </script>
     <template>
-        <NavBar />
         <DetailBody />
     </template>
     
