@@ -1,16 +1,21 @@
 <script>
+import NavBar from '../src/components/NavBar.vue';
+import DetailBody from '../src/components/DetailBody.vue';
     export default {
-        name: 'DetailsPage',
-        data() {
-            return {};
-        }
-    }
+    name: "DetailsPage",
+    data() {
+        return {};
+    },
+    components: { NavBar, DetailBody }
+}
     </script>
     <template>
-        <div><h1>DETAILS PAGE</h1></div>
+        <DetailBody />
     </template>
     
     <style scoped>
-       
+       .test {
+        background-color: #fafafa;
+       }
     </style>
         

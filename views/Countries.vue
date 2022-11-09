@@ -4,24 +4,18 @@ import BodyPage from '../src/components/BodyPage.vue';
 export default {
     name: 'Countries',
     data() {
-        return {};
+        return {
+            mode: false
+        };
     },
-    components: { NavBar, BodyPage }
+    components: { NavBar, BodyPage },
 }
 </script>
 <template>
-    <section class="c-section-navbar">
-        <NavBar />
-    </section>
-    <section class="c-section-body">
         <BodyPage />
-    </section>
 </template>
 
 <style scoped>
-    .c-section-body {
-        background-color: hsl(0, 0%, 98%);
-        height: 100%;
-    }
+    
 </style>
     

@@ -12,7 +12,7 @@ const routes = [
         name: 'Countries'
     },
     {
-        path: '/details',
+        path: '/details/:code',
         component: DetailsPage,
         name: 'DetailsPage'
     }
@@ -23,4 +23,4 @@ const router = new createRouter({
     routes
 });
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).mount('.app')
